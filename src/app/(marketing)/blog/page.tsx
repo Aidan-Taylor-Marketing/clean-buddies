@@ -23,9 +23,15 @@ export default async function BlogIndex() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-16">
       <div className="max-w-2xl">
-        <h1 className="text-4xl font-bold tracking-tight">The Clean Buddies blog</h1>
+        <p className="text-sm font-semibold uppercase tracking-widest text-primary">
+          Resources
+        </p>
+        <h1 className="mt-2 text-4xl font-bold tracking-tight">
+          Post-construction cleaning guides & answers
+        </h1>
         <p className="mt-3 text-muted-foreground">
-          Cleaning tips, how-tos, and a little behind-the-scenes from our crew.
+          Practical guides on dust, finishes, inspections, and getting a build
+          truly move-in ready — from the Clean Buddies crew.
         </p>
       </div>
 
