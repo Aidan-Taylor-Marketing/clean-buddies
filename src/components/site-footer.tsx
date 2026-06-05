@@ -1,67 +1,80 @@
 import Link from "next/link";
-import { Phone, MapPin } from "lucide-react";
+import Image from "next/image";
 import { site, serviceCities } from "@/lib/site";
+import { Button } from "@/components/ui/button";
+import logo from "../../public/logo.png";
+
+const quickLinks = [
+  { href: "/", label: "Home" },
+  { href: "/contact", label: "Contact" },
+  { href: "/about", label: "About Us" },
+  { href: "/services", label: "Services" },
+  { href: "/blog", label: "Resources" },
+  { href: "/contact", label: "Careers" },
+  { href: "#", label: "Privacy Policy" },
+  { href: "#", label: "Terms of Service" },
+];
 
 export function SiteFooter() {
   return (
     <footer className="mt-auto bg-[#0e182c] text-neutral-300">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-4">
-        <div>
-          <p className="text-xl font-extrabold tracking-tight text-white">
-            CLEAN <span className="text-primary">BUDDIES</span>
-          </p>
-          <p className="mt-1 text-xs font-semibold uppercase tracking-widest text-primary">
-            Construction Cleaning
-          </p>
-          <p className="mt-4 max-w-xs text-sm text-neutral-400">
-            {site.tagline} Locally owned, Phoenix-based, fully insured.
-          </p>
+      <div className="mx-auto max-w-6xl px-4 py-16">
+        <div className="grid gap-10 md:grid-cols-3">
+          <div>
+            <p className="font-heading text-lg font-semibold text-white">
+              Your Construction Crew&apos;s Cleaning Crew.
+            </p>
+            <Button asChild size="lg" className="mt-5">
+              <Link href="/contact">Get a Fast Quote</Link>
+            </Button>
+          </div>
+
+          <div>
+            <h4 className="text-sm font-bold uppercase tracking-widest text-primary">
+              Quick Links
+            </h4>
+            <ul className="mt-4 grid grid-cols-2 gap-2 text-sm uppercase tracking-wide">
+              {quickLinks.map((l, i) => (
+                <li key={`${l.label}-${i}`}>
+                  <Link href={l.href} className="text-neutral-400 hover:text-primary">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-sm font-bold uppercase tracking-widest text-primary">
+              Areas We Service
+            </h4>
+            <ul className="mt-4 grid grid-cols-2 gap-2 text-sm uppercase tracking-wide">
+              {serviceCities.map((city) => (
+                <li key={city}>
+                  <Link
+                    href="/service-areas"
+                    className="text-neutral-400 hover:text-primary"
+                  >
+                    {city}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
-        <div>
-          <h4 className="text-sm font-semibold text-white">Company</h4>
-          <ul className="mt-3 space-y-2 text-sm text-neutral-400">
-            {site.nav.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} className="hover:text-primary">
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <h4 className="text-sm font-semibold text-white">Service area</h4>
-          <p className="mt-3 flex items-center gap-2 text-sm text-neutral-400">
-            <MapPin className="h-4 w-4 text-primary" /> {site.serviceArea}
-          </p>
-          <p className="mt-2 text-sm text-neutral-500">
-            {serviceCities.slice(0, 8).join(", ")} &amp; more.
+        <div className="mt-14 flex flex-col items-center border-t border-white/10 pt-10">
+          <div className="rounded-2xl bg-white/[0.06] px-8 py-5">
+            <Image
+              src={logo}
+              alt={`${site.legalName} logo`}
+              className="h-12 w-auto"
+            />
+          </div>
+          <p className="mt-6 text-center text-xs text-neutral-500">
+            © {new Date().getFullYear()} {site.legalName}. All Rights Reserved.
           </p>
         </div>
-
-        <div>
-          <h4 className="text-sm font-semibold text-white">Get in touch</h4>
-          <a
-            href={`tel:${site.phone.replace(/[^\d+]/g, "")}`}
-            className="mt-3 flex items-center gap-2 text-sm text-neutral-300 hover:text-primary"
-          >
-            <Phone className="h-4 w-4 text-primary" /> {site.phone}
-          </a>
-          <Link
-            href="/contact"
-            className="mt-4 inline-flex rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90"
-          >
-            Get a free quote
-          </Link>
-        </div>
-      </div>
-
-      <div className="border-t border-white/10 py-4">
-        <p className="mx-auto max-w-6xl px-4 text-xs text-neutral-500">
-          © {new Date().getFullYear()} {site.legalName}. All rights reserved.
-        </p>
       </div>
     </footer>
   );

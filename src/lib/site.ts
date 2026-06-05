@@ -14,8 +14,8 @@ export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   nav: [
     { href: "/services", label: "Services" },
+    { href: "/about", label: "About Us" },
     { href: "/service-areas", label: "Service Areas" },
-    { href: "/about", label: "About" },
     { href: "/blog", label: "Resources" },
   ],
 } as const;
