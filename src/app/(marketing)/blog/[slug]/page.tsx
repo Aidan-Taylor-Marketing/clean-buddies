@@ -65,9 +65,9 @@ export default async function BlogPostPage({
         <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.body}</ReactMarkdown>
       </div>
 
-      <div className="mt-12 rounded-xl bg-muted/40 p-6 text-center">
-        <p className="font-medium">Want a hand with the cleaning?</p>
-        <Button asChild className="mt-3">
+      <div className="mt-12 rounded-xl bg-[#0a0f1a] p-6 text-center text-white">
+        <p className="font-medium">Got a build that needs cleaning?</p>
+        <Button asChild className="mt-3 font-semibold">
           <Link href="/contact">Get a free quote</Link>
         </Button>
       </div>

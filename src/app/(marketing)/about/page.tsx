@@ -1,38 +1,68 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Heart, ShieldCheck, Users, Sparkles } from "lucide-react";
-import { site } from "@/lib/site";
+import { HardHat, ShieldCheck, MapPin, BadgeCheck } from "lucide-react";
+import { site, stats } from "@/lib/site";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "About",
-  description: `Learn about ${site.name} — our story, values, and the team behind the sparkle.`,
+  description: `${site.legalName} — Phoenix-based, locally owned post-construction cleaning specialists with 100% W-2 employees and full insurance.`,
 };
 
 const values = [
-  { icon: Heart, title: "We care", body: "We treat every home and office like it's our own." },
-  { icon: ShieldCheck, title: "We're trustworthy", body: "Insured, bonded, and background-checked — always." },
-  { icon: Users, title: "We're consistent", body: "The same friendly faces you can count on each visit." },
-  { icon: Sparkles, title: "We're thorough", body: "Detail-obsessed cleaning, guaranteed to satisfy." },
+  {
+    icon: HardHat,
+    title: "Construction specialists",
+    body: "We're not residential cleaners moonlighting on job sites — post-construction is what we do.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "100% W-2 employees",
+    body: "Trained, accountable crews. No day-labor, no rotating subs you've never met.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Fully insured",
+    body: "General liability and workers' comp, with a certificate of insurance available same-day.",
+  },
+  {
+    icon: MapPin,
+    title: "Locally owned",
+    body: "Phoenix-based and built around how Valley contractors actually run a schedule.",
+  },
 ];
 
 export default function AboutPage() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-16">
-      <h1 className="text-4xl font-bold tracking-tight">About {site.name}</h1>
+      <p className="text-sm font-semibold uppercase tracking-widest text-primary">
+        About us
+      </p>
+      <h1 className="mt-2 text-4xl font-bold tracking-tight">
+        Your construction crew&apos;s cleaning crew
+      </h1>
       <div className="mt-6 space-y-4 text-lg text-muted-foreground">
         <p>
-          {site.name} started with a simple idea: cleaning should be easy to
-          book, dependable, and done right. We&apos;re a locally owned team
-          serving the {site.serviceArea}, and we&apos;ve built our reputation one
-          spotless home and office at a time.
+          {site.legalName} is a Phoenix-based, locally owned cleaning company
+          built specifically for the construction industry. We understand
+          construction timelines, inspection standards, and what it takes to
+          hand over a space that&apos;s truly finished.
         </p>
         <p>
-          Whether it&apos;s a weekly tidy-up, a deep seasonal clean, or getting a
-          property move-in ready, our trained cleaners bring the same care and
-          attention to every job. No contracts, no surprises — just a clean
-          space and a friendly team you can trust.
+          From rough clean to the final, white-glove detail, our trained W-2
+          crews deliver inspection-ready results — fully insured, with a
+          certificate of insurance available the same day you ask. You build it;
+          we handle the mess.
         </p>
+      </div>
+
+      <div className="mt-10 grid grid-cols-2 gap-4 rounded-xl border bg-muted/30 p-6 md:grid-cols-4">
+        {stats.map((s) => (
+          <div key={s.label} className="text-center">
+            <p className="text-2xl font-extrabold text-primary">{s.value}</p>
+            <p className="mt-1 text-xs text-muted-foreground">{s.label}</p>
+          </div>
+        ))}
       </div>
 
       <div className="mt-12 grid gap-6 sm:grid-cols-2">
@@ -45,12 +75,12 @@ export default function AboutPage() {
         ))}
       </div>
 
-      <div className="mt-12 rounded-xl bg-muted/40 p-8 text-center">
-        <h2 className="text-2xl font-semibold">Let&apos;s get your space sparkling</h2>
-        <p className="mt-2 text-muted-foreground">
-          Request a free quote and meet your new favorite cleaning crew.
+      <div className="mt-12 rounded-xl bg-[#0a0f1a] p-8 text-center text-white">
+        <h2 className="text-2xl font-semibold">Let&apos;s get your build finished</h2>
+        <p className="mt-2 text-neutral-300">
+          Free quote within 24 hours, crew on site in 3–5 days.
         </p>
-        <Button asChild className="mt-4">
+        <Button asChild className="mt-4 font-semibold">
           <Link href="/contact">Get a free quote</Link>
         </Button>
       </div>

@@ -1,29 +1,29 @@
 import Link from "next/link";
-import { Sparkles, Phone, Mail, MapPin } from "lucide-react";
-import { site } from "@/lib/site";
+import { Phone, MapPin } from "lucide-react";
+import { site, serviceCities } from "@/lib/site";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-auto border-t bg-muted/30">
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:grid-cols-2 md:grid-cols-4">
-        <div className="sm:col-span-2 md:col-span-1">
-          <div className="flex items-center gap-2 font-semibold">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <Sparkles className="h-5 w-5" />
-            </span>
-            {site.name}
-          </div>
-          <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-            {site.tagline}
+    <footer className="mt-auto bg-[#0a0f1a] text-neutral-300">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-4">
+        <div>
+          <p className="text-xl font-extrabold tracking-tight text-white">
+            CLEAN <span className="text-primary">BUDDIES</span>
+          </p>
+          <p className="mt-1 text-xs font-semibold uppercase tracking-widest text-primary">
+            Construction Cleaning
+          </p>
+          <p className="mt-4 max-w-xs text-sm text-neutral-400">
+            {site.tagline} Locally owned, Phoenix-based, fully insured.
           </p>
         </div>
 
         <div>
-          <h4 className="text-sm font-semibold">Company</h4>
-          <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+          <h4 className="text-sm font-semibold text-white">Company</h4>
+          <ul className="mt-3 space-y-2 text-sm text-neutral-400">
             {site.nav.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="hover:text-foreground">
+                <Link href={item.href} className="hover:text-primary">
                   {item.label}
                 </Link>
               </li>
@@ -32,40 +32,35 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <h4 className="text-sm font-semibold">Get in touch</h4>
-          <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-            <li className="flex items-center gap-2">
-              <Phone className="h-4 w-4 text-primary" />
-              <a href={`tel:${site.phone.replace(/[^\d+]/g, "")}`}>{site.phone}</a>
-            </li>
-            <li className="flex items-center gap-2">
-              <Mail className="h-4 w-4 text-primary" />
-              <a href={`mailto:${site.email}`}>{site.email}</a>
-            </li>
-            <li className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-primary" />
-              {site.serviceArea}
-            </li>
-          </ul>
+          <h4 className="text-sm font-semibold text-white">Service area</h4>
+          <p className="mt-3 flex items-center gap-2 text-sm text-neutral-400">
+            <MapPin className="h-4 w-4 text-primary" /> {site.serviceArea}
+          </p>
+          <p className="mt-2 text-sm text-neutral-500">
+            {serviceCities.slice(0, 8).join(", ")} &amp; more.
+          </p>
         </div>
 
         <div>
-          <h4 className="text-sm font-semibold">Ready to book?</h4>
-          <p className="mt-3 text-sm text-muted-foreground">
-            Get a free, no-obligation quote in minutes.
-          </p>
+          <h4 className="text-sm font-semibold text-white">Get in touch</h4>
+          <a
+            href={`tel:${site.phone.replace(/[^\d+]/g, "")}`}
+            className="mt-3 flex items-center gap-2 text-sm text-neutral-300 hover:text-primary"
+          >
+            <Phone className="h-4 w-4 text-primary" /> {site.phone}
+          </a>
           <Link
             href="/contact"
-            className="mt-3 inline-flex text-sm font-medium text-primary hover:underline"
+            className="mt-4 inline-flex rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90"
           >
-            Request a quote →
+            Get a free quote
           </Link>
         </div>
       </div>
 
-      <div className="border-t py-4">
-        <p className="mx-auto max-w-6xl px-4 text-xs text-muted-foreground">
-          © {new Date().getFullYear()} {site.name}. All rights reserved.
+      <div className="border-t border-white/10 py-4">
+        <p className="mx-auto max-w-6xl px-4 text-xs text-neutral-500">
+          © {new Date().getFullYear()} {site.legalName}. All rights reserved.
         </p>
       </div>
     </footer>

@@ -1,41 +1,45 @@
 import Link from "next/link";
-import { Sparkles, Phone } from "lucide-react";
+import Image from "next/image";
+import { Phone } from "lucide-react";
 import { site } from "@/lib/site";
 import { Button } from "@/components/ui/button";
+import logo from "../../public/logo.png";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur">
+    <header className="sticky top-0 z-40 w-full border-b bg-background/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4">
-        <Link href="/" className="flex items-center gap-2 font-semibold">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <Sparkles className="h-5 w-5" />
-          </span>
-          <span className="text-lg">{site.name}</span>
+        <Link href="/" className="flex items-center" aria-label={site.name}>
+          <Image
+            src={logo}
+            alt={`${site.legalName} logo`}
+            priority
+            className="h-9 w-auto"
+          />
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-7 md:flex">
           {site.nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="text-sm font-semibold text-muted-foreground transition-colors hover:text-primary"
             >
               {item.label}
             </Link>
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <a
             href={`tel:${site.phone.replace(/[^\d+]/g, "")}`}
-            className="hidden items-center gap-1.5 text-sm font-medium sm:flex"
+            className="hidden items-center gap-1.5 text-sm font-semibold sm:flex"
           >
             <Phone className="h-4 w-4 text-primary" />
             {site.phone}
           </a>
-          <Button asChild size="sm">
-            <Link href="/contact">Free quote</Link>
+          <Button asChild size="sm" className="font-semibold">
+            <Link href="/contact">Get a free quote</Link>
           </Button>
         </div>
       </div>

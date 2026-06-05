@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, MapPin, Clock, FileCheck2 } from "lucide-react";
 import { site } from "@/lib/site";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LeadForm } from "@/components/lead-form";
 
 export const metadata: Metadata = {
   title: "Contact & Free Quote",
-  description: `Request a free cleaning quote from ${site.name}. Fast, friendly, no obligation.`,
+  description: `Request a free post-construction cleaning quote from ${site.legalName}. 24-hour turnaround, serving all of ${site.serviceArea}.`,
 };
 
 export default async function ContactPage({
@@ -20,10 +20,15 @@ export default async function ContactPage({
     <div className="mx-auto max-w-6xl px-4 py-16">
       <div className="grid gap-10 lg:grid-cols-2">
         <div>
-          <h1 className="text-4xl font-bold tracking-tight">Get your free quote</h1>
+          <p className="text-sm font-semibold uppercase tracking-widest text-primary">
+            Get a free quote
+          </p>
+          <h1 className="mt-2 text-4xl font-bold tracking-tight">
+            Tell us about your project
+          </h1>
           <p className="mt-3 text-lg text-muted-foreground">
-            Fill out the form and we&apos;ll get back to you quickly with a
-            tailored quote. Prefer to talk? Reach us directly below.
+            Send us the scope and we&apos;ll turn around a clear, itemized quote
+            within 24 hours. Prefer to talk it through? Call us anytime.
           </p>
 
           <ul className="mt-8 space-y-4">
@@ -33,19 +38,8 @@ export default async function ContactPage({
               </span>
               <div>
                 <p className="text-sm text-muted-foreground">Call or text</p>
-                <a href={`tel:${site.phone.replace(/[^\d+]/g, "")}`} className="font-medium">
+                <a href={`tel:${site.phone.replace(/[^\d+]/g, "")}`} className="font-semibold">
                   {site.phone}
-                </a>
-              </div>
-            </li>
-            <li className="flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                <Mail className="h-5 w-5" />
-              </span>
-              <div>
-                <p className="text-sm text-muted-foreground">Email</p>
-                <a href={`mailto:${site.email}`} className="font-medium">
-                  {site.email}
                 </a>
               </div>
             </li>
@@ -55,7 +49,7 @@ export default async function ContactPage({
               </span>
               <div>
                 <p className="text-sm text-muted-foreground">Service area</p>
-                <p className="font-medium">{site.serviceArea}</p>
+                <p className="font-semibold">{site.serviceArea}</p>
               </div>
             </li>
             <li className="flex items-center gap-3">
@@ -63,8 +57,17 @@ export default async function ContactPage({
                 <Clock className="h-5 w-5" />
               </span>
               <div>
-                <p className="text-sm text-muted-foreground">Hours</p>
-                <p className="font-medium">Mon–Sat, 8am–6pm</p>
+                <p className="text-sm text-muted-foreground">Quote turnaround</p>
+                <p className="font-semibold">Within 24 hours · scheduling in 3–5 days</p>
+              </div>
+            </li>
+            <li className="flex items-center gap-3">
+              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <FileCheck2 className="h-5 w-5" />
+              </span>
+              <div>
+                <p className="text-sm text-muted-foreground">Insurance</p>
+                <p className="font-semibold">Fully insured · COI available same-day</p>
               </div>
             </li>
           </ul>
