@@ -14,7 +14,7 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-[#0a0f1a] text-white">
+      <section className="bg-[#0e182c] text-white">
         <div className="mx-auto max-w-4xl px-4 py-20 text-center">
           <p className="text-sm font-semibold uppercase tracking-widest text-primary">
             About Us
@@ -97,7 +97,7 @@ export default function AboutPage() {
         </div>
 
         {/* Inspection CTA */}
-        <div className="mt-14 rounded-xl bg-[#0a0f1a] p-8 text-center text-white">
+        <div className="mt-14 rounded-xl bg-[#0e182c] p-8 text-center text-white">
           <h2 className="text-2xl font-semibold">Get an Inspection-Ready Clean</h2>
           <p className="mt-2 text-neutral-300">
             Book a site inspection and receive a clear, no-surprise proposal.

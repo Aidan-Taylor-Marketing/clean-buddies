@@ -42,7 +42,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-[#0a0f1a] text-white">
+      <section className="relative overflow-hidden bg-[#0e182c] text-white">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-[0.07]"
@@ -252,7 +252,7 @@ export default function HomePage() {
       </section>
 
       {/* Final CTA */}
-      <section className="bg-[#0a0f1a] text-white">
+      <section className="bg-[#0e182c] text-white">
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-4 py-16 text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
             Ready for a spotless handoff?

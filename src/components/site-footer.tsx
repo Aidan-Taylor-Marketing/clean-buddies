@@ -4,7 +4,7 @@ import { site, serviceCities } from "@/lib/site";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-auto bg-[#0a0f1a] text-neutral-300">
+    <footer className="mt-auto bg-[#0e182c] text-neutral-300">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-4">
         <div>
           <p className="text-xl font-extrabold tracking-tight text-white">

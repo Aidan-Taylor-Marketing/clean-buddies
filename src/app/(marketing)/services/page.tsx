@@ -176,7 +176,7 @@ export default function ServicesPage() {
       </div>
 
       {/* Not sure */}
-      <div className="mt-16 rounded-xl bg-[#0a0f1a] p-8 text-center text-white">
+      <div className="mt-16 rounded-xl bg-[#0e182c] p-8 text-center text-white">
         <h2 className="text-2xl font-semibold">
           Not sure what you need? We&apos;ll figure it out.
         </h2>

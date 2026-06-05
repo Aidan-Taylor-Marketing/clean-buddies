@@ -74,7 +74,7 @@ export default async function ContactPage({
             </ul>
           </div>
 
-          <div className="mt-6 rounded-xl bg-[#0a0f1a] p-6 text-white">
+          <div className="mt-6 rounded-xl bg-[#0e182c] p-6 text-white">
             <p className="text-sm font-semibold uppercase tracking-widest text-primary">
               Need to book ASAP?
             </p>

@@ -37,7 +37,7 @@ export default function ServiceAreasPage() {
         ))}
       </div>
 
-      <div className="mt-12 rounded-xl bg-[#0a0f1a] p-8 text-center text-white">
+      <div className="mt-12 rounded-xl bg-[#0e182c] p-8 text-center text-white">
         <h2 className="text-2xl font-semibold">On a build in the Valley?</h2>
         <p className="mt-2 text-neutral-300">
           Get a free quote within 24 hours and a crew on site in 3–5 days.
