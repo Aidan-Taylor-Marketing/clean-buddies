@@ -1,10 +1,11 @@
 import { z } from "zod";
 
 export const leadSchema = z.object({
-  name: z.string().min(2, "Please enter your name").max(120),
+  firstName: z.string().min(1, "Please enter your first name").max(80),
+  lastName: z.string().max(80).optional().or(z.literal("")),
   email: z.string().email("Enter a valid email"),
   phone: z.string().max(40).optional().or(z.literal("")),
-  service: z.string().max(60).optional().or(z.literal("")),
+  service: z.string().max(80).optional().or(z.literal("")),
   address: z.string().max(200).optional().or(z.literal("")),
   message: z.string().max(2000).optional().or(z.literal("")),
   // honeypot — must stay empty

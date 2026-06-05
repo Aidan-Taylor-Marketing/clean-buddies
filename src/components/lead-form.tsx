@@ -1,39 +1,64 @@
 "use client";
 
-import { useActionState, useEffect, useRef } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { toast } from "sonner";
 import { submitLead } from "@/app/actions/submit-lead";
 import type { LeadActionState } from "@/lib/leads";
-import { services } from "@/lib/site";
+import { serviceOptions, site } from "@/lib/site";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 
 const initial: LeadActionState = { ok: false };
+const selectClass =
+  "border-input bg-transparent flex h-9 w-full rounded-md border px-3 py-1 text-sm shadow-xs focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:border-ring outline-none";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <Button type="submit" size="lg" className="w-full" disabled={pending}>
-      {pending ? "Sending…" : "Get my free quote"}
+    <Button type="submit" size="lg" className="w-full font-semibold" disabled={pending}>
+      {pending ? "Sending…" : "Get My Free Quote →"}
     </Button>
   );
 }
 
 export function LeadForm({ defaultService }: { defaultService?: string }) {
   const [state, formAction] = useActionState(submitLead, initial);
+  const [done, setDone] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     if (state.ok) {
-      toast.success("Thanks! We got your request and will reach out shortly.");
+      setDone(true);
       formRef.current?.reset();
     } else if (state.error && !state.fieldErrors) {
       toast.error(state.error);
     }
   }, [state]);
+
+  // Verbatim success state from the live site.
+  if (done) {
+    return (
+      <div className="rounded-lg border bg-muted/30 p-6 text-center">
+        <p className="text-lg font-semibold">Thanks. We got your request.</p>
+        <p className="mt-2 text-sm text-muted-foreground">
+          A member of our team will review your project and reach out within 24
+          hours.
+        </p>
+        <p className="mt-4 text-sm">
+          Need us sooner? Call{" "}
+          <a
+            href={`tel:${site.phone.replace(/[^\d+]/g, "")}`}
+            className="font-semibold text-primary"
+          >
+            {site.phone}
+          </a>
+        </p>
+      </div>
+    );
+  }
 
   const err = state.fieldErrors ?? {};
 
@@ -51,58 +76,64 @@ export function LeadForm({ defaultService }: { defaultService?: string }) {
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-1.5">
-          <Label htmlFor="name">Name</Label>
-          <Input id="name" name="name" required placeholder="Jane Doe" />
-          {err.name && <p className="text-sm text-destructive">{err.name}</p>}
+          <Label htmlFor="firstName">First name</Label>
+          <Input id="firstName" name="firstName" required placeholder="First name" />
+          {err.firstName && <p className="text-sm text-destructive">{err.firstName}</p>}
         </div>
         <div className="space-y-1.5">
-          <Label htmlFor="email">Email</Label>
-          <Input id="email" name="email" type="email" required placeholder="jane@email.com" />
-          {err.email && <p className="text-sm text-destructive">{err.email}</p>}
+          <Label htmlFor="lastName">Last name</Label>
+          <Input id="lastName" name="lastName" placeholder="Last name" />
         </div>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-1.5">
-          <Label htmlFor="phone">Phone</Label>
-          <Input id="phone" name="phone" type="tel" placeholder="(555) 123-4567" />
+          <Label htmlFor="phone">Phone number</Label>
+          <Input id="phone" name="phone" type="tel" placeholder="(480) 555-0100" />
         </div>
         <div className="space-y-1.5">
-          <Label htmlFor="service">Service</Label>
-          <select
-            id="service"
-            name="service"
-            defaultValue={defaultService ?? ""}
-            className="border-input bg-transparent flex h-9 w-full rounded-md border px-3 py-1 text-sm shadow-xs focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:border-ring outline-none"
-          >
-            <option value="">Not sure yet</option>
-            {services.map((s) => (
-              <option key={s.key} value={s.name}>
-                {s.name}
-              </option>
-            ))}
-          </select>
+          <Label htmlFor="email">Email</Label>
+          <Input id="email" name="email" type="email" required placeholder="you@email.com" />
+          {err.email && <p className="text-sm text-destructive">{err.email}</p>}
         </div>
       </div>
 
       <div className="space-y-1.5">
-        <Label htmlFor="address">Address</Label>
-        <Input id="address" name="address" placeholder="123 Main St, City" />
+        <Label htmlFor="address">Service address</Label>
+        <Input id="address" name="address" placeholder="Street, City, AZ" />
       </div>
 
       <div className="space-y-1.5">
-        <Label htmlFor="message">How can we help?</Label>
+        <Label htmlFor="service">What service do you need?</Label>
+        <select
+          id="service"
+          name="service"
+          defaultValue={defaultService ?? ""}
+          className={selectClass}
+        >
+          <option value="">Select a service…</option>
+          {serviceOptions.map((s) => (
+            <option key={s} value={s}>
+              {s}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="space-y-1.5">
+        <Label htmlFor="message">Project details (optional)</Label>
         <Textarea
           id="message"
           name="message"
-          rows={4}
-          placeholder="Tell us about your space and what you need…"
+          rows={3}
+          placeholder="Tell us about your project, timeline, or square footage…"
         />
       </div>
 
       <SubmitButton />
       <p className="text-center text-xs text-muted-foreground">
-        No spam. We&apos;ll only use your info to send your quote.
+        By submitting, you agree to receive calls or texts from Clean Buddies. No
+        spam. Reply STOP at any time.
       </p>
     </form>
   );

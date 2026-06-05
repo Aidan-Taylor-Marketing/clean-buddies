@@ -20,10 +20,13 @@ export async function submitLead(
     return { ok: false, error: "Please check the form.", fieldErrors };
   }
 
-  const { company, ...lead } = parsed.data;
+  const { company, firstName, lastName, ...rest } = parsed.data;
 
   // Honeypot tripped — pretend success, drop the bot.
   if (company) return { ok: true };
+
+  const name = [firstName, lastName].filter(Boolean).join(" ").trim();
+  const lead = { name, ...rest };
 
   const supabase = createAdminClient();
   const { error } = await supabase.from("leads").insert({

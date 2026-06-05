@@ -1,10 +1,18 @@
 import { Resend } from "resend";
-import type { LeadInput } from "@/lib/leads";
 import { site } from "@/lib/site";
+
+type LeadEmail = {
+  name: string;
+  email: string;
+  phone?: string;
+  service?: string;
+  address?: string;
+  message?: string;
+};
 
 // Sends a new-lead notification to the client's inbox via Resend.
 // No-ops gracefully (logs a warning) if Resend isn't configured yet.
-export async function sendLeadNotification(lead: LeadInput) {
+export async function sendLeadNotification(lead: LeadEmail) {
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.LEAD_NOTIFY_TO;
   const from = process.env.LEAD_NOTIFY_FROM || `${site.name} <onboarding@resend.dev>`;
