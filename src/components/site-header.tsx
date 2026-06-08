@@ -9,8 +9,8 @@ import {
   services,
   additionalServices,
   ongoingServices,
-  serviceCities,
 } from "@/lib/site";
+import { allCities, cityPath } from "@/lib/areas";
 import { Button } from "@/components/ui/button";
 import logo from "../../public/logo.png";
 
@@ -128,14 +128,14 @@ export function SiteHeader() {
                     All of Maricopa County
                   </p>
                   <ul className="mt-3 grid grid-cols-2 gap-x-6 gap-y-2.5 sm:grid-cols-3 lg:grid-cols-4">
-                    {serviceCities.map((city) => (
-                      <li key={city}>
+                    {allCities.map((city) => (
+                      <li key={city.slug}>
                         <Link
-                          href="/service-areas"
+                          href={cityPath(city.slug)}
                           className="text-sm text-foreground/80 hover:text-primary"
                           onClick={() => setOpen(null)}
                         >
-                          {city}
+                          {city.name.replace(/, AZ$/, "")}
                         </Link>
                       </li>
                     ))}

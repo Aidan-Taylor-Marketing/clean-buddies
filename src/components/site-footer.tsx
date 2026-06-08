@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { site, serviceCities } from "@/lib/site";
+import { site } from "@/lib/site";
+import { allCities, cityPath } from "@/lib/areas";
 import { Button } from "@/components/ui/button";
 import logo from "../../public/logo.png";
 
@@ -83,13 +84,13 @@ export function SiteFooter() {
               Areas We Service
             </h4>
             <ul className="mt-4 grid grid-cols-2 gap-2 text-sm uppercase tracking-wide">
-              {serviceCities.map((city) => (
-                <li key={city}>
+              {allCities.map((city) => (
+                <li key={city.slug}>
                   <Link
-                    href="/service-areas"
+                    href={cityPath(city.slug)}
                     className="text-muted-foreground hover:text-primary"
                   >
-                    {city}
+                    {city.name.replace(/, AZ$/, "")}
                   </Link>
                 </li>
               ))}

@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { MapPin } from "lucide-react";
-import { serviceCities, site } from "@/lib/site";
+import { MapPin, ArrowRight } from "lucide-react";
+import { site } from "@/lib/site";
+import { allCities, cityPath } from "@/lib/areas";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Service Areas",
-  description: `${site.legalName} provides post-construction cleaning across Maricopa County: ${serviceCities.join(", ")}.`,
+  description: `${site.legalName} provides post-construction cleaning across Maricopa County: ${allCities
+    .map((c) => c.name.replace(/, AZ$/, ""))
+    .join(", ")}.`,
 };
 
 export default function ServiceAreasPage() {
@@ -26,14 +29,18 @@ export default function ServiceAreasPage() {
       </div>
 
       <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
-        {serviceCities.map((city) => (
-          <div
-            key={city}
-            className="flex items-center gap-2 rounded-lg border bg-background px-4 py-3 text-sm font-medium"
+        {allCities.map((city) => (
+          <Link
+            key={city.slug}
+            href={cityPath(city.slug)}
+            className="group flex items-center justify-between gap-2 rounded-lg border bg-background px-4 py-3 text-sm font-medium transition-colors hover:border-primary hover:text-primary"
           >
-            <MapPin className="h-4 w-4 shrink-0 text-primary" />
-            {city}
-          </div>
+            <span className="flex items-center gap-2">
+              <MapPin className="h-4 w-4 shrink-0 text-primary" />
+              {city.name.replace(/, AZ$/, "")}
+            </span>
+            <ArrowRight className="h-4 w-4 opacity-0 transition-opacity group-hover:opacity-100" />
+          </Link>
         ))}
       </div>
 
