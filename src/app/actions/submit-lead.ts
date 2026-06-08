@@ -20,13 +20,39 @@ export async function submitLead(
     return { ok: false, error: "Please check the form.", fieldErrors };
   }
 
-  const { company, firstName, lastName, ...rest } = parsed.data;
+  const {
+    company,
+    firstName,
+    lastName,
+    businessName,
+    city,
+    zip,
+    projectType,
+    squareFootage,
+    projectStatus,
+    ...rest
+  } = parsed.data;
 
   // Honeypot tripped — pretend success, drop the bot.
   if (company) return { ok: true };
 
   const name = [firstName, lastName].filter(Boolean).join(" ").trim();
-  const lead = { name, ...rest };
+
+  // Fold the extended quote fields into the stored message/notes.
+  const details = [
+    businessName && `Business: ${businessName}`,
+    city && `City: ${city}`,
+    zip && `Zip: ${zip}`,
+    projectType && `Project type: ${projectType}`,
+    squareFootage && `Sq ft: ${squareFootage}`,
+    projectStatus && `Status: ${projectStatus}`,
+  ].filter(Boolean);
+  const message = [rest.message, details.join(" · ")]
+    .filter(Boolean)
+    .join("\n\n")
+    .trim();
+
+  const lead = { name, ...rest, message };
 
   const supabase = createAdminClient();
   const { error } = await supabase.from("leads").insert({
